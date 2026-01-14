@@ -1,12 +1,9 @@
 ---
 import { Image } from "astro:assets";
 
-/* TODO: Put your screenshots in the 'src/assets' folder 
-   and make sure the filenames match these imports.
-*/
-import sharedgpu from "../../public/sharedgpu.png"; // Rename your screenshot to this
-//import fakedoc from "../../public/fakedoc.png";     // Rename your screenshot to this
-// If you don't have images yet, comment out the imports and the 'image' property below to avoid errors.
+// We import the image that ACTUALLY exists in your file list
+import sharedgpu from "../../public/sharedgpu.png";
+// import fakedoc from "../../public/fakedoc.png"; <--- This caused the error because the file is missing.
 
 interface Project {
   title: string;
@@ -22,20 +19,23 @@ const projects: Project[] = [
     title: "SharedGPU",
     image: sharedgpu as ImageMetadata,
     link: "https://github.com/tajbirsanto/SharedGPU", 
-    preview: "https://www.sharedgpu.azurewebsites.net", 
+    preview: "https://github.com/tajbirsanto/SharedGPU", 
     status: "Prototype",
     description: "Distributed computing platform allowing users to share idle GPU power.",
   },
   {
-    title: "FakeDocChecker ",
-    image: fakedoc as ImageMetadata,
+    title: "FakeDocChecker (IPFS)",
+    // FIX: We are reusing 'sharedgpu' here because 'fakedoc.png' is missing. 
+    // Once you upload 'fakedoc.png', you can change this back!
+    image: sharedgpu as ImageMetadata, 
     link: "https://github.com/tajbirsanto", 
     preview: "#", 
     status: "In Development",
     description: "C# & Blockchain-based document verification system using IPFS to prevent plagiarism.",
   },
- 
+
 ];
+---
 ---
 
 <section
